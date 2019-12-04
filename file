@@ -1,0 +1,19 @@
+/**
+ * 给文档的每两个自然段间增加一个空白行
+ */
+fwrite(STDOUT,iconv('UTF-8', 'GBK', "请输入文件名："));
+$buf = trim(fgets(STDIN));
+
+if(!file_exists($buf)) die(fwrite(STDOUT,iconv('UTF-8', 'GBK', "文件不存在")));
+$myfile = fopen($buf,'r') ;
+if(!$myfile) die(fwrite(STDOUT,iconv('UTF-8', 'GBK', "文件打不开")));
+
+fwrite(STDOUT,iconv('UTF-8', 'GBK', "请输入新文件名："));
+$new = trim(fgets(STDIN));
+
+while(!feof($myfile)) {
+    file_put_contents($new,fgets($myfile).PHP_EOL,FILE_APPEND);
+}
+
+fclose($myfile);
+fwrite(STDOUT,iconv('UTF-8', 'GBK', "完成！！！"));
